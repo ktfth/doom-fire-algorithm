@@ -48,7 +48,7 @@ let iteratePixelIndexWidth = (Z) => {
   } while(n < Z)
 }
 
-function calculateFirePropagation() {
+let calculateFirePropagation = () => {
   iteratePixelIndexWidth(fireWidth)
   renderFire()
 }
