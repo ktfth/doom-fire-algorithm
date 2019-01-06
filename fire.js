@@ -53,20 +53,27 @@ let calculateFirePropagation = () => {
   renderFire()
 }
 
-function updateFireIntensityPerPixel(currentPixelIndex) {
-  const belowPixelIndex = currentPixelIndex + fireWidth
+let updateFireIntensityPerPixel = (currentPixelIndex) => {
+  let decay = 0
+  let belowPixelFireIntensity = 0
+  let newFireIntensity = 0
+  let belowPixelIndex = () => currentPixelIndex + fireWidth
+  let fireDimensions = () => fireWidth * fireHeight
+
 
   // below pixel index overflows canvas
-  if (belowPixelIndex >= fireWidth * fireHeight) {
-    return
+  if (belowPixelIndex() >= fireDimensions()) {
+    return firePixelsArray
   }
 
-  const decay = Math.floor(Math.random() * 3)
-  const belowPixelFireIntensity = firePixelsArray[belowPixelIndex]
-  const newFireIntensity =
+  decay = Math.floor(Math.random() * 3)
+  belowPixelFireIntensity = firePixelsArray[belowPixelIndex()]
+  newFireIntensity =
     belowPixelFireIntensity - decay >= 0 ? belowPixelFireIntensity - decay : 0
 
   firePixelsArray[currentPixelIndex - decay] = newFireIntensity
+
+  return firePixelsArray
 }
 
 function renderFire() {
